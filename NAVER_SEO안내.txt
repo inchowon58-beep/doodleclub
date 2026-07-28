@@ -1,0 +1,23 @@
+# 네이버 사이트맵·RSS 제출 안내 (골든두들 클럽)
+
+## 제출 URL (배포 도메인 기준)
+
+- 사이트맵: `https://doodleclub.vercel.app/sitemap.xml`
+- RSS: `https://doodleclub.vercel.app/rss.xml`
+- IndexNow 키 파일: `https://doodleclub.vercel.app/9d632b19a797e6473fec14b25c553aa8.txt`
+
+Vercel `NEXT_PUBLIC_SITE_URL` 을 실제 도메인과 맞추세요.
+
+## 네이버 서치어드바이저
+
+1. [네이버 서치어드바이저](https://searchadvisor.naver.com/) 로그인
+2. 사이트 등록
+3. 사이트맵: `/sitemap.xml` 제출
+4. RSS: `/rss.xml` 또는 `/feed` 제출 (item 1개 이상 권장 — 글 발행 후)
+5. IndexNow는 발행 시 자동 전송 (Bing 등). 네이버는 사이트맵·RSS 중심.
+
+## 로컬 대량 발행
+
+1. `tools/webdoc/run.bat`
+2. 사이트 URL = 배포 도메인
+3. Blob 토큰은 **doodleclub 전용**만 사용
