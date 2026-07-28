@@ -52,6 +52,14 @@ export const metadata: Metadata = {
     ],
     apple: "/apple-touch-icon.png",
   },
+  verification: {
+    other: {
+      "naver-site-verification": [
+        "dd42e6efd8e128ba1aae6d21c92a1f6f4ca0806d",
+        "b6dfca0cbe0557955eebddc842d00f71d644477d",
+      ],
+    },
+  },
   other: {
     "msapplication-TileColor": "#2c2622",
   },
@@ -64,6 +72,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ko">
       <head>
+        <meta
+          name="naver-site-verification"
+          content="dd42e6efd8e128ba1aae6d21c92a1f6f4ca0806d"
+        />
+        <meta
+          name="naver-site-verification"
+          content="b6dfca0cbe0557955eebddc842d00f71d644477d"
+        />
         <link rel="preconnect" href="https://cdn.jsdelivr.net" />
         <link
           rel="stylesheet"
