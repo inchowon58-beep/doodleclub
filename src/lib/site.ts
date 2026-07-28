@@ -1,6 +1,6 @@
 /** 골든두들 클럽 — 골든두들분양 사이트 공통 설정 (단독 프로젝트) */
 
-const phoneRaw = (process.env.NEXT_PUBLIC_PHONE || "").trim();
+const phoneRaw = (process.env.NEXT_PUBLIC_PHONE || "0505-464-1004").trim();
 
 export const SITE = {
   name: "골든두들 클럽",
@@ -43,7 +43,7 @@ export const SITE = {
   areaServed: "대한민국 전국",
   /** 커스텀 도메인 연결 후 NEXT_PUBLIC_SITE_URL 을 그 주소로 교체 */
   siteUrl:
-    process.env.NEXT_PUBLIC_SITE_URL || "https://doodleclub.vercel.app",
+    process.env.NEXT_PUBLIC_SITE_URL || "https://poodle-dud.vercel.app",
 } as const;
 
 export const CTA_LABEL = "분양 상담";

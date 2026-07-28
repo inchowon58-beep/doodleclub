@@ -21,10 +21,10 @@ from urllib.parse import quote
 from cdn_images import pick_images as cdn_pick_images
 
 BRAND = "골든두들 클럽"
-DEFAULT_SITE_URL = "https://doodleclub.vercel.app"
+DEFAULT_SITE_URL = "https://poodle-dud.vercel.app"
 BRAND_EN = "Golden Doodle Club"
 SITE_NAME = "골든두들 클럽"
-PHONE = os.environ.get("NEXT_PUBLIC_PHONE", "").strip() or "분양상담"
+PHONE = os.environ.get("NEXT_PUBLIC_PHONE", "").strip() or "0505-464-1004"
 PHONE_TEL = "".join(c for c in PHONE if c.isdigit()) or ""
 IMAGE_BASE = "https://image.cattery.co.kr/doodle"
 IMAGE_COUNT = 40

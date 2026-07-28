@@ -28,7 +28,7 @@ exe: `tools\webdoc\build_exe.bat` → `골든두들클럽웹문서생성기.exe`
 
 | 키 | 설명 |
 |---|---|
-| `NEXT_PUBLIC_SITE_URL` | `https://doodleclub.vercel.app` |
+| `NEXT_PUBLIC_SITE_URL` | `https://poodle-dud.vercel.app` |
 | `NEXT_PUBLIC_PHONE` | 상담 전화 (필수 권장) |
 | `NEXT_PUBLIC_KAKAO_URL` | 카톡 URL (선택) |
 | `ADMIN_JWT_SECRET` | 관리자 JWT |

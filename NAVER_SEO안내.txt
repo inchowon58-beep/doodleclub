@@ -2,9 +2,9 @@
 
 ## 제출 URL (배포 도메인 기준)
 
-- 사이트맵: `https://doodleclub.vercel.app/sitemap.xml`
-- RSS: `https://doodleclub.vercel.app/rss.xml`
-- IndexNow 키 파일: `https://doodleclub.vercel.app/9d632b19a797e6473fec14b25c553aa8.txt`
+- 사이트맵: `https://poodle-dud.vercel.app/sitemap.xml`
+- RSS: `https://poodle-dud.vercel.app/rss.xml`
+- IndexNow 키 파일: `https://poodle-dud.vercel.app/9d632b19a797e6473fec14b25c553aa8.txt`
 
 Vercel `NEXT_PUBLIC_SITE_URL` 을 실제 도메인과 맞추세요.
 
