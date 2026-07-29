@@ -19,7 +19,7 @@ function loadEnvLocal() {
   for (const name of [".env.local", ".env"]) {
     const p = path.join(root, name);
     if (!fs.existsSync(p)) continue;
-    const text = fs.readFileSync(p, "utf8");
+    const text = fs.readFileSync(p, "utf8").replace(/^\uFEFF/, "");
     for (const line of text.split(/\r?\n/)) {
       const m = line.match(/^\s*(?:export\s+)?([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*)$/);
       if (!m) continue;
@@ -30,7 +30,8 @@ function loadEnvLocal() {
       ) {
         v = v.slice(1, -1);
       }
-      if (!process.env[m[1]]) process.env[m[1]] = v;
+      // .env.local 값이 있으면 시스템/이전 env 보다 우선 (특히 Blob 토큰)
+      if (v) process.env[m[1]] = v;
     }
   }
 }
@@ -109,7 +110,7 @@ async function main() {
   const indexRaw = await readBlobText("seo-data/index.json", token);
   if (indexRaw) {
     try {
-      slugs = JSON.parse(indexRaw).slugs || [];
+      slugs = JSON.parse(indexRaw.replace(/^\uFEFF/, "")).slugs || [];
     } catch {
       slugs = [];
     }
@@ -117,7 +118,9 @@ async function main() {
 
   const uploaded = [];
   for (const file of files) {
-    const page = JSON.parse(fs.readFileSync(file, "utf8"));
+    const page = JSON.parse(
+      fs.readFileSync(file, "utf8").replace(/^\uFEFF/, "")
+    );
     const slug = page.slug;
     if (!slug) continue;
     await put(`seo-data/pages/${slug}.json`, JSON.stringify(page), putOpts);

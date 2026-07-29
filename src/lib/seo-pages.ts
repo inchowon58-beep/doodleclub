@@ -182,7 +182,8 @@ function readIndexFs(): SeoIndex {
     return { slugs: [], updatedAt: new Date().toISOString() };
   }
   try {
-    return JSON.parse(fs.readFileSync(file, "utf-8")) as SeoIndex;
+    const raw = fs.readFileSync(file, "utf-8").replace(/^\uFEFF/, "");
+    return JSON.parse(raw) as SeoIndex;
   } catch {
     return { slugs: [], updatedAt: new Date().toISOString() };
   }
@@ -207,7 +208,8 @@ function readPageFs(slug: string): SeoPage | null {
     const file = path.join(dir, `${key}.json`);
     if (!fs.existsSync(file)) continue;
     try {
-      return JSON.parse(fs.readFileSync(file, "utf-8")) as SeoPage;
+      const raw = fs.readFileSync(file, "utf-8").replace(/^\uFEFF/, "");
+      return JSON.parse(raw) as SeoPage;
     } catch {
       /* try next */
     }

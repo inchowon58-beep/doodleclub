@@ -1,6 +1,6 @@
 (() => {
   const $ = (id) => document.getElementById(id);
-  const STORAGE_KEY = "goldendoodle-club-seo-settings";
+  const STORAGE_KEY = "gdc-seo-settings-namhae";
 
   let pollTimer = null;
   let lastLogLen = 0;

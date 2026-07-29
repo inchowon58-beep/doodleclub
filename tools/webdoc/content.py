@@ -21,7 +21,7 @@ from urllib.parse import quote
 from cdn_images import pick_images as cdn_pick_images
 
 BRAND = "골든두들 클럽"
-DEFAULT_SITE_URL = "https://poodle-dud.vercel.app"
+DEFAULT_SITE_URL = "https://namhae.puppytimes.co.kr"
 BRAND_EN = "Golden Doodle Club"
 SITE_NAME = "골든두들 클럽"
 PHONE = os.environ.get("NEXT_PUBLIC_PHONE", "").strip() or "0505-464-1004"
@@ -687,16 +687,16 @@ def generate_batch(
             image_count=image_count,
         )
         slugs.append(page["slug"])
-        with open(os.path.join(pages_dir, f"{page['slug']}.json"), "w", encoding="utf-8") as f:
+        with open(os.path.join(pages_dir, f"{page['slug']}.json"), "w", encoding="utf-8", newline="\n") as f:
             json.dump(page, f, ensure_ascii=False, indent=2)
         html = write_html(page, site_url)
-        with open(os.path.join(out_dir, f"{page['slug']}.html"), "w", encoding="utf-8") as f:
+        with open(os.path.join(out_dir, f"{page['slug']}.html"), "w", encoding="utf-8", newline="\n") as f:
             f.write(html)
         urls.append(f"{site_url.rstrip('/')}/guide/{quote(page['slug'])}")
     index = {"slugs": slugs, "updatedAt": datetime.utcnow().isoformat() + "Z"}
-    with open(os.path.join(out_dir, "index.json"), "w", encoding="utf-8") as f:
+    with open(os.path.join(out_dir, "index.json"), "w", encoding="utf-8", newline="\n") as f:
         json.dump(index, f, ensure_ascii=False, indent=2)
-    with open(os.path.join(out_dir, "urls.txt"), "w", encoding="utf-8") as f:
+    with open(os.path.join(out_dir, "urls.txt"), "w", encoding="utf-8", newline="\n") as f:
         f.write("\n".join(urls))
     if sync_public:
         pub_pages = os.path.join(sync_public, "pages")
@@ -704,18 +704,19 @@ def generate_batch(
         existing = {"slugs": [], "updatedAt": ""}
         idx_path = os.path.join(sync_public, "index.json")
         if os.path.isfile(idx_path):
-            with open(idx_path, encoding="utf-8") as f:
+            with open(idx_path, encoding="utf-8-sig") as f:
                 existing = json.load(f)
         for slug in slugs:
             src = os.path.join(pages_dir, f"{slug}.json")
             dst = os.path.join(pub_pages, f"{slug}.json")
-            with open(src, encoding="utf-8") as f:
+            with open(src, encoding="utf-8-sig") as f:
                 data = f.read()
-            with open(dst, "w", encoding="utf-8") as f:
+            with open(dst, "w", encoding="utf-8", newline="\n") as f:
                 f.write(data)
-            if slug not in existing["slugs"]:
+            if slug not in existing.get("slugs", []):
+                existing.setdefault("slugs", [])
                 existing["slugs"].insert(0, slug)
         existing["updatedAt"] = datetime.utcnow().isoformat() + "Z"
-        with open(idx_path, "w", encoding="utf-8") as f:
+        with open(idx_path, "w", encoding="utf-8", newline="\n") as f:
             json.dump(existing, f, ensure_ascii=False, indent=2)
     return urls

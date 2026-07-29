@@ -10,7 +10,7 @@ function siteHost(): string {
   try {
     return new URL(SITE.siteUrl).host;
   } catch {
-    return "poodle-dud.vercel.app";
+    return "namhae.puppytimes.co.kr";
   }
 }
 

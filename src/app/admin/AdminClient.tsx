@@ -56,7 +56,7 @@ export default function AdminClient() {
 
   function absolutePageUrl(path: string) {
     const base = (
-      process.env.NEXT_PUBLIC_SITE_URL || "https://poodle-dud.vercel.app"
+      process.env.NEXT_PUBLIC_SITE_URL || "https://namhae.puppytimes.co.kr"
     ).replace(/\/$/, "");
     if (!path) return `${base}/guide`;
     if (path.startsWith("http")) return path;

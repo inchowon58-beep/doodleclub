@@ -18,7 +18,7 @@ except ImportError:  # pragma: no cover
 
 INDEXNOW_ENDPOINT = "https://api.indexnow.org/indexnow"
 DEFAULT_KEY = "9d632b19a797e6473fec14b25c553aa8"
-DEFAULT_HOST = "poodle-dud.vercel.app"
+DEFAULT_HOST = "namhae.puppytimes.co.kr"
 # 유아독존 SEO와 동일 — 한 번 요청당 URL 수
 DEFAULT_CHUNK = 40
 MAX_CHUNK = 100

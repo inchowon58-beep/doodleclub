@@ -55,17 +55,14 @@ def webdoc_dir() -> str:
 
 
 def load_blob_token() -> Optional[str]:
-    env = os.environ.get("BLOB_READ_WRITE_TOKEN", "").strip()
-    if env:
-        return env
-
+    """프로젝트 .env.local 을 시스템 환경변수보다 우선한다."""
     root = project_root()
     for name in (".env.local", ".env"):
         path = os.path.join(root, name)
         if not os.path.isfile(path):
             continue
         try:
-            text = open(path, encoding="utf-8").read()
+            text = open(path, encoding="utf-8-sig").read()
         except OSError:
             continue
         m = re.search(
@@ -74,12 +71,28 @@ def load_blob_token() -> Optional[str]:
             re.M,
         )
         if m:
-            return m.group(1).strip()
+            val = m.group(1).strip()
+            if val:
+                return val
         m2 = re.search(
             r"^(?:export\s+)?(\w*BLOB\w*READ_WRITE_TOKEN)\s*=\s*[\"']?([^\"'\r\n#]+)[\"']?",
             text,
             re.M,
         )
         if m2:
-            return m2.group(2).strip()
+            val = m2.group(2).strip()
+            if val:
+                return val
+
+    env = os.environ.get("BLOB_READ_WRITE_TOKEN", "").strip()
+    if env:
+        return env
+    for key, value in os.environ.items():
+        if (
+            value
+            and value.strip()
+            and "BLOB" in key
+            and key.endswith("READ_WRITE_TOKEN")
+        ):
+            return value.strip()
     return None

@@ -17,7 +17,7 @@ Production / Preview / Development 모두에 등록:
 
 | 키 | 값 | 비고 |
 |---|---|---|
-| `NEXT_PUBLIC_SITE_URL` | `https://poodle-dud.vercel.app` | 끝 `/` 없이. 커스텀 도메인 확정 시 교체 |
+| `NEXT_PUBLIC_SITE_URL` | `https://namhae.puppytimes.co.kr` | 끝 `/` 없이 |
 | `NEXT_PUBLIC_PHONE` | `0505-464-1004` | 상담 전화 |
 | `NEXT_PUBLIC_KAKAO_URL` | (선택) 카톡 URL | |
 | `ADMIN_JWT_SECRET` | `b73aaff87b228f1f1f0038527809e41a03191157f32ef51c` | 이 프로젝트 전용 |
