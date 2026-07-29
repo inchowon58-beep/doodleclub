@@ -50,7 +50,8 @@ export function orgJsonLd() {
     alternateName: SITE.nameEn,
     description: SITE.description,
     url: SITE.siteUrl,
-    image: `${SITE.siteUrl}${SITE.logo}`,
+    image: [`${SITE.siteUrl.replace(/\/$/, "")}${SITE.ogImagePath}`, `${SITE.siteUrl}${SITE.logo}`],
+    logo: `${SITE.siteUrl}${SITE.logo}`,
     areaServed: "KR",
     knowsAbout: [
       "골든두들분양",

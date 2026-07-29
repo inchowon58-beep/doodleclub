@@ -38,16 +38,29 @@ export const SITE = {
   email: "",
   address: "",
   logo: "/logo.png",
+  /** 네이버·카카오 등 OG용 정적 이미지 (webp/동적 경로 회피) */
+  ogImagePath: "/og.jpg",
   imageBase: "https://image.cattery.co.kr/doodle",
   imageCount: 40,
   areaServed: "대한민국 전국",
   /** 커스텀 도메인 연결 후 NEXT_PUBLIC_SITE_URL 을 그 주소로 교체 */
   siteUrl:
-    process.env.NEXT_PUBLIC_SITE_URL || "https://poodle-dud.vercel.app",
+    process.env.NEXT_PUBLIC_SITE_URL || "https://namhae.puppytimes.co.kr",
 } as const;
 
 export const CTA_LABEL = "분양 상담";
 export const CTA_LABEL_CALL = "전화문의";
+
+export function absoluteUrl(path: string): string {
+  const base = SITE.siteUrl.replace(/\/$/, "");
+  if (!path) return base;
+  if (path.startsWith("http")) return path;
+  return `${base}${path.startsWith("/") ? path : `/${path}`}`;
+}
+
+export function siteOgImageUrl(): string {
+  return absoluteUrl(SITE.ogImagePath);
+}
 
 export function phoneToTel(phone: string = SITE.phone): string {
   const digits = phone.replace(/\D/g, "");

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { SITE, CTA_LABEL } from "@/lib/site";
+import { SITE, CTA_LABEL, siteOgImageUrl } from "@/lib/site";
 import { listPages, readPage } from "@/lib/seo-pages";
 import { galleryAlt } from "@/lib/images";
 import { faqJsonLd } from "@/lib/faq-data";
@@ -25,10 +25,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!page) return { title: "페이지 없음" };
   const base = SITE.siteUrl.replace(/\/$/, "");
   const url = `${base}/guide/${encodeURIComponent(page.slug)}`;
-  const rawImage = page.images?.[0] || SITE.logo;
-  const ogImage = rawImage.startsWith("http")
-    ? rawImage
-    : `${base}${rawImage.startsWith("/") ? "" : "/"}${rawImage}`;
+  // 네이버는 webp·동적 OG 경로를 잘 못 읽는 경우가 많아 정적 JPG를 1순위로 사용
+  const ogImage = siteOgImageUrl();
   return {
     title: page.title,
     description: page.metaDescription,
@@ -47,6 +45,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
           width: 1200,
           height: 630,
           alt: galleryAlt(page.keyword, 1),
+          type: "image/jpeg",
         },
       ],
     },

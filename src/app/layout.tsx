@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
-import { SITE } from "@/lib/site";
+import { SITE, siteOgImageUrl } from "@/lib/site";
 import { faqJsonLd, orgJsonLd, speakableJsonLd } from "@/lib/faq-data";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import FixedCallButton from "./components/FixedCallButton";
 import "./globals.css";
+
+const ogImage = siteOgImageUrl();
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.siteUrl),
@@ -27,10 +29,11 @@ export const metadata: Metadata = {
     description: SITE.description,
     images: [
       {
-        url: "/opengraph-image",
+        url: ogImage,
         width: 1200,
         height: 630,
-        alt: "골든두들분양 골든두들 클럽",
+        alt: "골든두들분양 · 골든두들 클럽",
+        type: "image/jpeg",
       },
     ],
   },
@@ -38,7 +41,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `골든두들분양 | ${SITE.name}`,
     description: SITE.description,
-    images: ["/opengraph-image"],
+    images: [ogImage],
   },
   robots: {
     index: true,
@@ -80,6 +83,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           name="naver-site-verification"
           content="b6dfca0cbe0557955eebddc842d00f71d644477d"
         />
+        {/* 네이버 수집용 — 확장자 있는 정적 JPG + image_src */}
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:image:secure_url" content={ogImage} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:type" content="image/jpeg" />
+        <link rel="image_src" href={ogImage} />
         <link rel="preconnect" href="https://cdn.jsdelivr.net" />
         <link
           rel="stylesheet"
