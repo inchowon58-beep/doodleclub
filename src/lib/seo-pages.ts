@@ -25,6 +25,10 @@ export type SeoPage = {
   faqs: FaqItem[];
   images: string[];
   ctaText: string;
+  /** 전화 CTA 버튼 문구 (보호소: 입소및무료분양 문의) */
+  ctaButtonLabel?: string;
+  /** 보호소(파양입소·무료분양) 페이지 여부 */
+  isShelter?: boolean;
   createdAt: string;
   updatedAt: string;
   /** 핵심 서비스 6종 (상담·사이즈·코트·가격·종류·사후케어) */

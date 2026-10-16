@@ -1,6 +1,13 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { SITE, phoneToTel, hasPhone } from "@/lib/site";
+import {
+  BREED_PHONE,
+  BREED_PHONE_TEL,
+  SHELTER_CTA_LABEL,
+  isShelterPath,
+} from "@/lib/breed-catalog";
 
 function KakaoIcon() {
   return (
@@ -23,8 +30,18 @@ function PhoneIcon() {
 }
 
 export default function FixedCallButton() {
+  const pathname = usePathname() || "";
+  const isBreed =
+    pathname.startsWith("/bunyang") || pathname.startsWith("/goyang");
+  const shelter = isShelterPath(pathname);
   const kakao = SITE.kakaoUrl?.trim();
-  const phoneOk = hasPhone();
+  const phoneOk = isBreed || hasPhone();
+  const phoneHref = isBreed ? BREED_PHONE_TEL : phoneToTel();
+  const phoneLabel = shelter
+    ? SHELTER_CTA_LABEL
+    : isBreed
+      ? BREED_PHONE
+      : SITE.phone;
 
   if (!kakao && !phoneOk) return null;
 
@@ -46,11 +63,15 @@ export default function FixedCallButton() {
           </a>
         )}
         {phoneOk && (
-          <a href={phoneToTel()} className="maison-fab maison-fab-phone" aria-label="전화문의">
+          <a
+            href={phoneHref}
+            className="maison-fab maison-fab-phone"
+            aria-label={shelter ? SHELTER_CTA_LABEL : "전화문의"}
+          >
             <span className="maison-fab-icon">
               <PhoneIcon />
             </span>
-            <span className="maison-fab-label">{SITE.phone}</span>
+            <span className="maison-fab-label">{phoneLabel}</span>
           </a>
         )}
       </div>
